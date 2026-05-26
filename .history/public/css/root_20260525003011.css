@@ -1,0 +1,30 @@
+
+    :root {
+      --brand: #073B4C;
+      --brand-dark: #797878;
+      --brand-hover: #0A4F66;
+      --brand-soft: #EAF3F6;
+
+      --accent: #FD7316;
+      --accent-hover: #FF9F3F;
+      --accent-soft: #FFF0E3;
+
+      --page: #F5F7F8;
+      --white: #FFFFFF;
+      --text: #101820;
+      --muted: #DAC9BA;
+      --line: #DDE7EA;
+
+      --max: 980px;
+      --wide: 1360px;
+      --radius: 8px;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+    
+    body {
+      background: var(--page);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }

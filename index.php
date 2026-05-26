@@ -12,963 +12,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-  <style>
-    :root {
-      --brand: #073B4C;
-      --brand-dark: #031F2A;
-      --brand-hover: #0A4F66;
-      --brand-soft: #EAF3F6;
-
-      --accent: #F28C28;
-      --accent-hover: #FF9F3F;
-      --accent-soft: #FFF0E3;
-
-      --page: #F5F7F8;
-      --white: #FFFFFF;
-      --text: #101820;
-      --muted: #64737A;
-      --line: #DDE7EA;
-
-      --max: 980px;
-      --wide: 1360px;
-      --radius: 8px;
-      --ease: cubic-bezier(.2, .8, .2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--page);
-      color: var(--text);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: geometricPrecision;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-    }
-
-    button {
-      font-family: inherit;
-    }
-
-    ::selection {
-      background: var(--accent);
-      color: var(--brand-dark);
-    }
-
-    .container {
-      width: 100%;
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .wide-container {
-      width: 100%;
-      max-width: var(--wide);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* HEADER */
-
-    .header {
-      position: fixed;
-      top: 26px;
-      left: 0;
-      width: 100%;
-      z-index: 100;
-      pointer-events: none;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      pointer-events: none;
-    }
-
-    .logo {
-      color: #fff;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      text-shadow: 0 8px 24px rgba(0,0,0,.35);
-      pointer-events: auto;
-      position: relative;
-      z-index: 3;
-      transition: color .25s var(--ease), text-shadow .25s var(--ease);
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .header.on-light .logo {
-      color: var(--brand);
-      text-shadow: none;
-    }
-
-    .menu-area {
-      position: relative;
-      pointer-events: auto;
-    }
-
-    .menu-toggle {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      border: 1px solid rgba(242,140,40,.48);
-      background: rgba(3,31,42,.86);
-      backdrop-filter: blur(16px);
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      cursor: pointer;
-      box-shadow: 0 18px 40px rgba(3,31,42,.34);
-      transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
-      position: relative;
-      z-index: 5;
-    }
-
-    .menu-toggle:hover {
-      background: var(--accent);
-      color: var(--brand-dark);
-      transform: translateY(-1px);
-    }
-
-    .menu-toggle i {
-      position: absolute;
-      transition: opacity .22s var(--ease), transform .22s var(--ease);
-    }
-
-    .menu-toggle .icon-close {
-      opacity: 0;
-      transform: rotate(-90deg) scale(.5);
-    }
-
-    .header.menu-open .menu-toggle .icon-menu {
-      opacity: 0;
-      transform: rotate(90deg) scale(.5);
-    }
-
-    .header.menu-open .menu-toggle .icon-close {
-      opacity: 1;
-      transform: rotate(0) scale(1);
-    }
-
-    .nav-panel {
-      position: absolute;
-      right: 64px;
-      top: 50%;
-      transform: translateY(-50%) translateX(34px) scaleX(.08);
-      transform-origin: right center;
-      opacity: 0;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      border-radius: 999px;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 18px 45px rgba(3,31,42,.2);
-      transition: opacity .22s var(--ease), transform .38s var(--ease);
-    }
-
-    .header.menu-open .nav-panel {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(-50%) translateX(0) scaleX(1);
-    }
-
-    .nav-panel a {
-      min-width: 102px;
-      height: 50px;
-      padding: 0 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: #59656b;
-      font-size: .84rem;
-      font-weight: 700;
-      border-right: 1px solid rgba(3,31,42,.08);
-      opacity: 0;
-      transform: translateX(12px);
-      transition:
-        background .2s var(--ease),
-        color .2s var(--ease),
-        opacity .25s var(--ease),
-        transform .25s var(--ease);
-    }
-
-    .nav-panel a:last-child {
-      border-right: none;
-    }
-
-    .header.menu-open .nav-panel a {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .header.menu-open .nav-panel a:nth-child(1) { transition-delay: .06s; }
-    .header.menu-open .nav-panel a:nth-child(2) { transition-delay: .09s; }
-    .header.menu-open .nav-panel a:nth-child(3) { transition-delay: .12s; }
-    .header.menu-open .nav-panel a:nth-child(4) { transition-delay: .15s; }
-    .header.menu-open .nav-panel a:nth-child(5) { transition-delay: .18s; }
-
-    .nav-panel a:hover,
-    .nav-panel a.active {
-      background: var(--accent);
-      color: var(--brand-dark);
-    }
-
-    /* HERO */
-
-    .hero {
-      position: relative;
-      min-height: 100svh;
-      height: 100svh;
-      overflow: hidden;
-      background: var(--brand-dark);
-    }
-
-    .hero-slider {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    .hero-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transform: scale(1.045);
-      transition: opacity 1.4s ease, transform 7s ease;
-    }
-
-    .hero-slide.active {
-      opacity: 1;
-      transform: scale(1);
-      z-index: 2;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background:
-        linear-gradient(90deg, rgba(3,31,42,.72) 0%, rgba(7,59,76,.35) 45%, rgba(3,31,42,.06) 100%),
-        linear-gradient(180deg, rgba(3,31,42,.02) 0%, rgba(3,31,42,.22) 48%, rgba(3,31,42,.72) 100%);
-    }
-
-    .hero-content-wrap {
-      position: relative;
-      z-index: 3;
-      min-height: 100svh;
-      height: 100svh;
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .hero-content {
-      max-width: 490px;
-      padding-bottom: clamp(72px, 11vh, 120px);
-      color: #fff;
-    }
-
-    .hero h1 {
-      font-size: clamp(1.85rem, 3vw, 2.7rem);
-      line-height: 1.05;
-      letter-spacing: -0.045em;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      max-width: 420px;
-      font-size: .92rem;
-      line-height: 1.45;
-      font-weight: 600;
-      color: rgba(255,255,255,.9);
-      margin-bottom: 22px;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .hero-actions a,
-    .btn {
-      height: 42px;
-      min-width: 154px;
-      padding: 0 22px;
-      border-radius: 6px;
-      background: var(--accent);
-      color: var(--brand-dark);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: .82rem;
-      font-weight: 800;
-      transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
-    }
-
-    .hero-actions a:hover,
-    .btn:hover {
-      transform: translateY(-1px);
-      background: var(--accent-hover);
-    }
-
-    .hero-actions a:last-child,
-    .btn-ghost {
-      background: rgba(255,255,255,.16);
-      color: #fff;
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-actions a:last-child:hover,
-    .btn-ghost:hover {
-      background: rgba(255,255,255,.24);
-    }
-
-    .hero-dots {
-      position: absolute;
-      left: 50%;
-      bottom: 30px;
-      transform: translateX(-50%);
-      z-index: 4;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      border: none;
-      background: rgba(255,255,255,.42);
-      cursor: pointer;
-      transition: width .25s var(--ease), background .25s var(--ease);
-    }
-
-    .hero-dot.active {
-      width: 30px;
-      background: var(--accent);
-    }
-
-    .hero-count {
-      position: absolute;
-      right: 24px;
-      bottom: 26px;
-      z-index: 4;
-      color: rgba(255,255,255,.78);
-      font-size: .78rem;
-      font-weight: 700;
-    }
-
-    .hero-count span {
-      color: var(--accent);
-    }
-
-    /* COMPETENCE */
-
-    .competence {
-      background: #fff;
-      padding: 56px 0 66px;
-    }
-
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      color: var(--brand);
-      margin-bottom: 22px;
-    }
-
-    .section-kicker {
-      display: inline-flex;
-      margin-bottom: 8px;
-      color: var(--accent);
-      font-size: .76rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-    }
-
-    .competence-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .competence-card {
-      min-height: 110px;
-      border: 1px solid rgba(7,59,76,.28);
-      border-radius: 6px;
-      background: var(--brand-soft);
-      padding: 20px 18px;
-    }
-
-    .competence-card i {
-      color: var(--brand);
-      font-size: 1.25rem;
-      margin-bottom: 14px;
-      display: inline-flex;
-    }
-
-    .competence-card h3 {
-      font-size: .88rem;
-      color: var(--brand);
-      font-weight: 800;
-      margin-bottom: 5px;
-      letter-spacing: -0.025em;
-    }
-
-    .competence-card p {
-      color: var(--muted);
-      font-size: .72rem;
-      font-weight: 600;
-      line-height: 1.45;
-    }
-
-    /* WORK SHOWCASE */
-
-    .work-showcase {
-      background:
-        radial-gradient(circle at 18% 0%, rgba(242,140,40,.12), transparent 26%),
-        linear-gradient(180deg, #EEF4F6 0%, #F8FAFB 100%);
-      padding: 76px 0 0;
-    }
-
-    .work-head {
-      max-width: var(--max);
-      margin: 0 auto 36px;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: .8fr 1fr;
-      gap: 40px;
-      align-items: end;
-    }
-
-    .work-head h2 {
-      color: var(--brand);
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-      font-weight: 800;
-    }
-
-    .work-head p {
-      color: var(--muted);
-      max-width: 430px;
-      font-size: .9rem;
-      line-height: 1.6;
-      font-weight: 600;
-    }
-
-    .split-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 520px;
-      background: #fff;
-      border-top: 1px solid rgba(7,59,76,.08);
-    }
-
-    .split-row.reverse .split-image {
-      order: 2;
-    }
-
-    .split-row.reverse .split-copy {
-      order: 1;
-    }
-
-    .split-image {
-      min-height: 520px;
-      overflow: hidden;
-      background: #d7d7d7;
-      position: relative;
-    }
-
-    .split-image img {
-      transition: transform 1s var(--ease);
-    }
-
-    .split-row:hover .split-image img {
-      transform: scale(1.04);
-    }
-
-    .split-copy {
-      min-height: 520px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px 34px;
-      cursor: pointer;
-    }
-
-    .split-inner {
-      max-width: 360px;
-    }
-
-    .project-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 24px;
-      padding: 0 16px;
-      border-radius: 999px;
-      background: #d9f0df;
-      color: #5c8063;
-      font-size: .68rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-    }
-
-    .split-copy h3 {
-      color: var(--brand);
-      font-size: 1.25rem;
-      line-height: 1.1;
-      font-weight: 800;
-      letter-spacing: -0.035em;
-    }
-
-    .project-reveal {
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: max-height .45s var(--ease), opacity .35s var(--ease), transform .35s var(--ease);
-    }
-
-    .split-row.active .project-reveal {
-      max-height: 260px;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .project-reveal p {
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: .86rem;
-      line-height: 1.58;
-      font-weight: 600;
-    }
-
-    .project-reveal .btn {
-      margin-top: 18px;
-      min-width: 170px;
-    }
-
-    .click-hint {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      margin-top: 16px;
-      color: var(--accent);
-      font-size: .78rem;
-      font-weight: 800;
-    }
-
-    .split-row.active .click-hint {
-      display: none;
-    }
-
-    /* VENUE SECTION */
-
-    .venue-section {
-      background: var(--brand-dark);
-      color: #fff;
-      padding: 90px 0;
-    }
-
-    .venue-shell {
-      max-width: var(--wide);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .venue-card {
-      position: relative;
-      min-height: 620px;
-      border-radius: 10px;
-      overflow: hidden;
-      background: #123;
-    }
-
-    .venue-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      background:
-        linear-gradient(90deg, rgba(3,31,42,.86) 0%, rgba(3,31,42,.58) 38%, rgba(3,31,42,.12) 100%),
-        linear-gradient(180deg, rgba(3,31,42,.06), rgba(3,31,42,.55));
-    }
-
-    .venue-card img {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    .venue-content {
-      position: relative;
-      z-index: 3;
-      min-height: 620px;
-      max-width: 480px;
-      padding: 72px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .venue-content h2 {
-      font-size: clamp(1.8rem, 3vw, 3rem);
-      line-height: 1;
-      letter-spacing: -0.06em;
-      font-weight: 800;
-      margin-bottom: 16px;
-    }
-
-    .venue-content p {
-      color: rgba(255,255,255,.75);
-      font-size: .92rem;
-      line-height: 1.65;
-      font-weight: 600;
-      margin-bottom: 22px;
-    }
-
-    .venue-meta {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .venue-meta span {
-      min-height: 28px;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.12);
-      display: inline-flex;
-      align-items: center;
-      font-size: .72rem;
-      font-weight: 700;
-      color: rgba(255,255,255,.78);
-    }
-
-    /* BREATHING BLOCK */
-
-    .breathing-block {
-      height: 340px;
-      background:
-        linear-gradient(180deg, #d9d9d9 0%, #eeeeee 100%);
-    }
-
-    /* MOSAIC */
-
-    .mosaic-section {
-      background: #f1f3f4;
-      padding: 0;
-    }
-
-    .mosaic {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: #d9d9d9;
-    }
-
-    .mosaic-item {
-      height: 310px;
-      overflow: hidden;
-      position: relative;
-      background: #cfd6d8;
-    }
-
-    .mosaic-item img {
-      transition: transform .9s var(--ease);
-    }
-
-    .mosaic-item:hover img {
-      transform: scale(1.05);
-    }
-
-    /* SOFT CTA */
-
-    .soft-cta {
-      padding: 110px 0;
-      background: var(--page);
-    }
-
-    .soft-cta-box {
-      max-width: 740px;
-      min-height: 230px;
-      border-radius: 8px;
-      background:
-        linear-gradient(135deg, rgba(7,59,76,.92), rgba(3,31,42,.98));
-      margin: 0 auto;
-      padding: 44px;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-    }
-
-    .soft-cta-box h2 {
-      font-size: 1.5rem;
-      line-height: 1.1;
-      letter-spacing: -0.045em;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .soft-cta-box p {
-      max-width: 400px;
-      color: rgba(255,255,255,.72);
-      font-size: .88rem;
-      line-height: 1.55;
-      font-weight: 600;
-    }
-
-    /* FOOTER */
-
-    .footer-section {
-      background: var(--brand);
-      min-height: 360px;
-      padding: 78px 0;
-      color: #fff;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1fr .85fr;
-      gap: 70px;
-      align-items: start;
-    }
-
-    .footer-section h2 {
-      font-size: 1.45rem;
-      line-height: 1.12;
-      letter-spacing: -0.04em;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-
-    .footer-section p {
-      color: rgba(255,255,255,.76);
-      max-width: 420px;
-      font-size: .9rem;
-      line-height: 1.55;
-      font-weight: 600;
-    }
-
-    .footer-links {
-      display: grid;
-      gap: 12px;
-    }
-
-    .footer-links a {
-      height: 44px;
-      border-radius: 5px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      font-size: .86rem;
-      font-weight: 700;
-      transition: background .2s var(--ease), color .2s var(--ease);
-    }
-
-    .footer-links a:hover {
-      background: rgba(242,140,40,.18);
-      color: var(--accent);
-    }
-
-    .copyright {
-      margin-top: 70px;
-      color: rgba(255,255,255,.48);
-      font-size: .82rem;
-      font-weight: 600;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-      .header {
-        top: 18px;
-      }
-
-      .nav-panel {
-        position: fixed;
-        right: 24px;
-        top: 86px;
-        transform: translateY(-14px) scale(.96);
-        transform-origin: top right;
-        flex-direction: column;
-        align-items: stretch;
-        min-width: 230px;
-        border-radius: 18px;
-      }
-
-      .header.menu-open .nav-panel {
-        transform: translateY(0) scale(1);
-      }
-
-      .nav-panel a {
-        width: 100%;
-        justify-content: flex-start;
-        border-right: none;
-        border-bottom: 1px solid rgba(3,31,42,.08);
-      }
-
-      .nav-panel a:last-child {
-        border-bottom: none;
-      }
-
-      .competence-grid,
-      .work-head,
-      .split-row,
-      .mosaic,
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .split-row.reverse .split-image,
-      .split-row.reverse .split-copy {
-        order: initial;
-      }
-
-      .split-image,
-      .split-copy,
-      .split-row {
-        min-height: auto;
-      }
-
-      .split-image {
-        height: 430px;
-      }
-
-      .split-copy {
-        min-height: 260px;
-      }
-
-      .venue-card,
-      .venue-content {
-        min-height: 520px;
-      }
-
-      .venue-content {
-        padding: 44px;
-      }
-
-      .mosaic-item {
-        height: 260px;
-      }
-
-      .breathing-block {
-        height: 220px;
-      }
-
-      .soft-cta-box {
-        display: grid;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .hero,
-      .hero-content-wrap {
-        min-height: 100svh;
-        height: 100svh;
-      }
-
-      .hero-content {
-        padding-bottom: 76px;
-      }
-
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero-actions {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .hero-actions a,
-      .btn {
-        width: 100%;
-      }
-
-      .hero-count {
-        display: none;
-      }
-
-      .competence {
-        padding-top: 44px;
-      }
-
-      .split-image {
-        height: 340px;
-      }
-
-      .split-copy {
-        justify-content: flex-start;
-        padding: 44px 24px;
-      }
-
-      .venue-section {
-        padding: 64px 0;
-      }
-
-      .venue-content {
-        padding: 32px;
-      }
-
-      .venue-content h2 {
-        font-size: 2rem;
-      }
-
-      .soft-cta {
-        padding: 80px 24px;
-      }
-
-      .soft-cta-box {
-        padding: 30px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="./public/css/root.css">
+  <link rel="stylesheet" href="./public/css/header.css">
+  <link rel="stylesheet" href="./public/css/index.css">
+  <link rel="stylesheet" href="./public/css/font.css">
+  <link rel="stylesheet" href="./public/css/index.css">
+  
 </head>
 
 <body>
@@ -977,14 +26,17 @@
   <header class="header" id="siteHeader">
     <div class="wide-container">
       <nav class="nav">
-        <a href="index.html" class="logo">mustapha<span>.</span></a>
+        <a href="index.html" class="logo">
+          <img src="./public/icons/logo-white.svg" alt="">
+        </a>
 
         <div class="menu-area">
+
           <div class="nav-panel" id="navPanel">
             <a href="index.php" class="active">Home</a>
             <a href="work.php">Work</a>
             <a href="#competence">Skills</a>
-            <a href="#venues">Venues</a>
+            <a href="./routes/venues.php">Venues</a>
             <a href="#contact">Contact</a>
           </div>
 
@@ -992,6 +44,7 @@
             <i class="bi bi-list icon-menu"></i>
             <i class="bi bi-x-lg icon-close"></i>
           </button>
+
         </div>
       </nav>
     </div>
@@ -1000,20 +53,21 @@
   <!-- Hero -->
   <section class="hero" data-header-theme="dark">
     <div class="hero-slider" id="heroSlider">
+
       <div class="hero-slide active">
-        <img src="./public/img/profile/hero0.png" alt="3D architectural visual design">
+        <img src="./public/img/profile/hero0.jpg" alt="3D architectural visual design">
       </div>
 
       <div class="hero-slide">
-        <img src="./public/img/profile/hero1.png" alt="Exhibition booth visual design">
+        <img src="./public/img/profile/hero1.jpg" alt="Exhibition booth visual design">
       </div>
 
       <div class="hero-slide">
-        <img src="./public/img/profile/hero2.png" alt="Event branding visual design">
+        <img src="./public/img/profile/hero2.jpg" alt="Event branding visual design">
       </div>
 
       <div class="hero-slide">
-        <img src="./public/img/profile/office0.png" alt="Website interface visual design">
+        <img src="./public/img/profile/office0.jpg" alt="Website interface visual design">
       </div>
     </div>
 
@@ -1021,11 +75,10 @@
       <div class="hero-content">
         <h1>Creative visuals by mustapha.</h1>
         <p>Websites. 3D mockups. Exhibitions. Events. Brands. Interfaces.</p>
-
         <div class="hero-actions">
           <a href="#work">View Work</a>
-          <a href="#contact">Contact</a>
         </div>
+
       </div>
     </div>
 
@@ -1036,35 +89,54 @@
       <button class="hero-dot" aria-label="View slide 4"></button>
     </div>
 
-    <div class="hero-count">
-      <span id="heroCurrent">01</span> / 04
-    </div>
   </section>
 
   <!-- Competence -->
   <section class="competence" id="competence" data-header-theme="light">
-    <div class="container">
-      <h2 class="section-title">I am competence in!</h2>
+    <div class="container competence-container">
+
+      <div class="competence-head">
+        <h2>What I Do</h2>
+      </div>
 
       <div class="competence-grid">
-        <div class="competence-card">
-          <i class="bi bi-globe2"></i>
-          <h3>Website & System</h3>
-          <p>Clean websites and functional systems for communication and registration.</p>
-        </div>
+        <a href="#work" class="competence-item">
+          <div class="competence-icon">
+            <i class="bi bi-globe2"></i>
+          </div>
 
-        <div class="competence-card">
-          <i class="bi bi-box"></i>
-          <h3>3D Visual mockups</h3>
-          <p>Spaces, booths, stages, and environments before production.</p>
-        </div>
+          <div class="competence-copy">
+            <h3>Website & System</h3>
+            <span></span>
+            <p>Clean websites and functional systems for communication and registration.</p>
+          </div>
+        </a>
 
-        <div class="competence-card">
-          <i class="bi bi-vector-pen"></i>
-          <h3>Brand & Graphic Design</h3>
-          <p>Campaign visuals and presentation assets for events and brands.</p>
-        </div>
+        <a href="#work" class="competence-item">
+          <div class="competence-icon">
+            <i class="bi bi-box"></i>
+          </div>
+
+          <div class="competence-copy">
+            <h3>3D Visual Mockups</h3>
+            <span></span>
+            <p>Spaces, booths, stages, and environments before production.</p>
+          </div>
+        </a>
+
+        <a href="#work" class="competence-item">
+          <div class="competence-icon">
+            <i class="bi bi-vector-pen"></i>
+          </div>
+
+          <div class="competence-copy">
+            <h3>Brand & Graphic Design</h3>
+            <span></span>
+            <p>Campaign visuals and presentation assets for events and brands.</p>
+          </div>
+        </a>
       </div>
+
     </div>
   </section>
 
@@ -1072,19 +144,13 @@
   <section class="work-showcase" id="work" data-header-theme="light">
     <div class="work-head">
       <div>
-        <span class="section-kicker">Selected work</span>
         <h2>Projects made to be seen.</h2>
       </div>
-
-      <p>
-        A visual selection of event concepts, booth designs, digital systems, and brand environments.
-        Click a project to see the detail and open the actual work.
-      </p>
     </div>
 
     <div class="split-row project-item">
       <div class="split-image">
-        <img src="./public/img/profile/site01.png" alt="SITE Tourism Event">
+        <img src="./public/img/profile/mlimani00.jpg" alt="SITE Tourism Event">
       </div>
 
       <div class="split-copy">
@@ -1109,7 +175,7 @@
 
     <div class="split-row reverse project-item">
       <div class="split-image">
-        <img src="./public/img/profile/tib0.png" alt="TIB Booth Concept">
+        <img src="./public/img/profile/tib0.jpg" alt="TIB Booth Concept">
       </div>
 
       <div class="split-copy">
@@ -1134,7 +200,7 @@
 
     <div class="split-row project-item">
       <div class="split-image">
-        <img src="./public/img/profile/udsm0.png" alt="SAFE & PROLA Booth">
+        <img src="./public/img/profile/tent0.jpg" alt="SAFE & PROLA Booth">
       </div>
 
       <div class="split-copy">
@@ -1162,10 +228,10 @@
   <section class="venue-section" id="venues" data-header-theme="dark">
     <div class="venue-shell">
       <div class="venue-card">
-        <img src="./public/img/profile/mlimani00.png" alt="3D venue model in Tanzania">
+        <img src="./public/img/profile/mlimani02.jpg" alt="3D venue model in Tanzania">
 
         <div class="venue-content">
-          <span class="section-kicker">Venue 3D Library</span>
+
           <h2>Explore event venues before production.</h2>
 
           <p>
@@ -1180,9 +246,10 @@
             <span>Event halls</span>
           </div>
 
-          <a href="venues.html" class="btn">
+          <a href="./routes/venues.php" class="btn">
             View Venue Feature <i class="bi bi-arrow-right"></i>
           </a>
+
         </div>
       </div>
     </div>
@@ -1331,8 +398,9 @@
       heroSlides[index].classList.add("active");
       heroDots[index].classList.add("active");
 
-      heroCurrent.textContent = String(index + 1).padStart(2, "0");
+      //heroCurrent.textContent = String(index + 1).padStart(2, "0");
       currentHeroSlide = index;
+      
     }
 
     function nextHeroSlide() {

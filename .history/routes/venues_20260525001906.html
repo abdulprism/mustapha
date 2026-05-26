@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Venues — mustapha.</title>
+  <meta name="description" content="3D venue models and event venue visualization in Tanzania by Abdul Mustapha Hemedi." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <style>
+    :root {
+      --brand: #073B4C;
+      --brand-dark: #031F2A;
+      --brand-hover: #0A4F66;
+      --brand-soft: #EAF3F6;
+
+      --accent: #F28C28;
+      --accent-hover: #FF9F3F;
+
+      --page: #F5F7F8;
+      --white: #FFFFFF;
+      --text: #101820;
+      --muted: #64737A;
+      --line: #DDE7EA;
+
+      --max: 1080px;
+      --wide: 1360px;
+      --radius: 10px;
+      --ease: cubic-bezier(.2, .8, .2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--page);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--brand-dark);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .wide-container {
+      width: 100%;
+      max-width: var(--wide);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .btn {
+      height: 42px;
+      min-width: 154px;
+      padding: 0 22px;
+      border-radius: 6px;
+      background: var(--accent);
+      color: var(--brand-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: .82rem;
+      font-weight: 800;
+      transition: transform .2s var(--ease), background .2s var(--ease), color .2s var(--ease);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      background: var(--accent-hover);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,.14);
+      color: #fff;
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.24);
+    }
+
+    /* HEADER */
+
+    .header {
+      position: fixed;
+      top: 26px;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      text-shadow: 0 8px 24px rgba(0,0,0,.35);
+      pointer-events: auto;
+      position: relative;
+      z-index: 3;
+      transition: color .25s var(--ease), text-shadow .25s var(--ease);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .header.on-light .logo {
+      color: var(--brand);
+      text-shadow: none;
+    }
+
+    .menu-area {
+      position: relative;
+      pointer-events: auto;
+    }
+
+    .menu-toggle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(242,140,40,.48);
+      background: rgba(3,31,42,.86);
+      backdrop-filter: blur(16px);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 18px 40px rgba(3,31,42,.34);
+      transition: background .25s var(--ease), color .25s var(--ease), transform .25s var(--ease);
+      position: relative;
+      z-index: 5;
+    }
+
+    .menu-toggle:hover {
+      background: var(--accent);
+      color: var(--brand-dark);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle i {
+      position: absolute;
+      transition: opacity .22s var(--ease), transform .22s var(--ease);
+    }
+
+    .menu-toggle .icon-close {
+      opacity: 0;
+      transform: rotate(-90deg) scale(.5);
+    }
+
+    .header.menu-open .menu-toggle .icon-menu {
+      opacity: 0;
+      transform: rotate(90deg) scale(.5);
+    }
+
+    .header.menu-open .menu-toggle .icon-close {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+
+    .nav-panel {
+      position: absolute;
+      right: 64px;
+      top: 50%;
+      transform: translateY(-50%) translateX(34px) scaleX(.08);
+      transform-origin: right center;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 45px rgba(3,31,42,.2);
+      transition: opacity .22s var(--ease), transform .38s var(--ease);
+    }
+
+    .header.menu-open .nav-panel {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(-50%) translateX(0) scaleX(1);
+    }
+
+    .nav-panel a {
+      min-width: 102px;
+      height: 50px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #59656b;
+      font-size: .84rem;
+      font-weight: 700;
+      border-right: 1px solid rgba(3,31,42,.08);
+      opacity: 0;
+      transform: translateX(12px);
+      transition:
+        background .2s var(--ease),
+        color .2s var(--ease),
+        opacity .25s var(--ease),
+        transform .25s var(--ease);
+    }
+
+    .nav-panel a:last-child {
+      border-right: none;
+    }
+
+    .header.menu-open .nav-panel a {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .header.menu-open .nav-panel a:nth-child(1) { transition-delay: .06s; }
+    .header.menu-open .nav-panel a:nth-child(2) { transition-delay: .09s; }
+    .header.menu-open .nav-panel a:nth-child(3) { transition-delay: .12s; }
+    .header.menu-open .nav-panel a:nth-child(4) { transition-delay: .15s; }
+    .header.menu-open .nav-panel a:nth-child(5) { transition-delay: .18s; }
+
+    .nav-panel a:hover,
+    .nav-panel a.active {
+      background: var(--accent);
+      color: var(--brand-dark);
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 100svh;
+      height: 100svh;
+      position: relative;
+      overflow: hidden;
+      background: var(--brand-dark);
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+
+    .hero-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(3,31,42,.82) 0%, rgba(7,59,76,.44) 45%, rgba(3,31,42,.08) 100%),
+        linear-gradient(180deg, rgba(3,31,42,.06) 0%, rgba(3,31,42,.22) 48%, rgba(3,31,42,.78) 100%);
+    }
+
+    .hero-content-wrap {
+      position: relative;
+      z-index: 3;
+      height: 100svh;
+      min-height: 100svh;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-content {
+      color: #fff;
+      max-width: 620px;
+      padding-bottom: clamp(78px, 11vh, 120px);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      color: var(--accent);
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 5vw, 5.6rem);
+      line-height: .92;
+      letter-spacing: -0.075em;
+      font-weight: 800;
+      margin-bottom: 18px;
+      max-width: 760px;
+    }
+
+    .hero p {
+      max-width: 500px;
+      color: rgba(255,255,255,.82);
+      font-size: .95rem;
+      line-height: 1.65;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-note {
+      position: absolute;
+      right: 24px;
+      bottom: 26px;
+      z-index: 4;
+      color: rgba(255,255,255,.72);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .hero-note span {
+      color: var(--accent);
+    }
+
+    /* VENUE LIST */
+
+    .venue-list {
+      background:
+        radial-gradient(circle at 15% 0%, rgba(242,140,40,.12), transparent 26%),
+        linear-gradient(180deg, #F8FAFB 0%, #EEF4F6 100%);
+      padding: 90px 0;
+    }
+
+    .venue-intro {
+      display: grid;
+      grid-template-columns: .8fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 44px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: .76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .venue-intro h2 {
+      color: var(--brand);
+      font-size: clamp(1.8rem, 3.4vw, 3.4rem);
+      line-height: .98;
+      letter-spacing: -0.065em;
+      font-weight: 800;
+    }
+
+    .venue-intro p {
+      color: var(--muted);
+      max-width: 520px;
+      font-size: .92rem;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .venue-stack {
+      display: grid;
+      gap: 34px;
+    }
+
+    .venue-card {
+      min-height: 520px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: var(--brand-dark);
+      box-shadow: 0 22px 60px rgba(3,31,42,.12);
+    }
+
+    .venue-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        linear-gradient(90deg, rgba(3,31,42,.9) 0%, rgba(3,31,42,.58) 39%, rgba(3,31,42,.08) 100%),
+        linear-gradient(180deg, rgba(3,31,42,.04), rgba(3,31,42,.5));
+      pointer-events: none;
+    }
+
+    .venue-card.image-right::after {
+      background:
+        linear-gradient(270deg, rgba(3,31,42,.9) 0%, rgba(3,31,42,.58) 39%, rgba(3,31,42,.08) 100%),
+        linear-gradient(180deg, rgba(3,31,42,.04), rgba(3,31,42,.5));
+    }
+
+    .venue-card img {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      transition: transform 1s var(--ease);
+    }
+
+    .venue-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .venue-content {
+      position: relative;
+      z-index: 3;
+      min-height: 520px;
+      max-width: 480px;
+      padding: 60px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .venue-card.image-right .venue-content {
+      margin-left: auto;
+    }
+
+    .venue-content small {
+      color: var(--accent);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .venue-content h3 {
+      font-size: clamp(1.6rem, 2.7vw, 2.7rem);
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .venue-content p {
+      color: rgba(255,255,255,.75);
+      font-size: .9rem;
+      line-height: 1.65;
+      font-weight: 600;
+      margin-bottom: 22px;
+    }
+
+    .venue-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 24px;
+    }
+
+    .venue-tags span {
+      min-height: 27px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: rgba(255,255,255,.78);
+      display: inline-flex;
+      align-items: center;
+      font-size: .7rem;
+      font-weight: 700;
+    }
+
+    /* CTA */
+
+    .cta {
+      background: #fff;
+      padding: 100px 24px;
+    }
+
+    .cta-box {
+      max-width: 800px;
+      min-height: 250px;
+      margin: 0 auto;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg, rgba(7,59,76,.94), rgba(3,31,42,1));
+      color: #fff;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .cta-box h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .cta-box p {
+      max-width: 460px;
+      color: rgba(255,255,255,.72);
+      font-size: .9rem;
+      line-height: 1.6;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+
+    .footer-section {
+      background: var(--brand);
+      min-height: 360px;
+      padding: 78px 0;
+      color: #fff;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr .85fr;
+      gap: 70px;
+      align-items: start;
+    }
+
+    .footer-section h2 {
+      font-size: 1.45rem;
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .footer-section p {
+      color: rgba(255,255,255,.76);
+      max-width: 420px;
+      font-size: .9rem;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      height: 44px;
+      border-radius: 5px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: .86rem;
+      font-weight: 700;
+      transition: background .2s var(--ease), color .2s var(--ease);
+    }
+
+    .footer-links a:hover {
+      background: rgba(242,140,40,.18);
+      color: var(--accent);
+    }
+
+    .copyright {
+      margin-top: 70px;
+      color: rgba(255,255,255,.48);
+      font-size: .82rem;
+      font-weight: 600;
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      .header {
+        top: 18px;
+      }
+
+      .nav-panel {
+        position: fixed;
+        right: 24px;
+        top: 86px;
+        transform: translateY(-14px) scale(.96);
+        transform-origin: top right;
+        flex-direction: column;
+        align-items: stretch;
+        min-width: 230px;
+        border-radius: 18px;
+      }
+
+      .header.menu-open .nav-panel {
+        transform: translateY(0) scale(1);
+      }
+
+      .nav-panel a {
+        width: 100%;
+        justify-content: flex-start;
+        border-right: none;
+        border-bottom: 1px solid rgba(3,31,42,.08);
+      }
+
+      .nav-panel a:last-child {
+        border-bottom: none;
+      }
+
+      .venue-intro,
+      .footer-grid,
+      .cta-box {
+        grid-template-columns: 1fr;
+      }
+
+      .venue-card,
+      .venue-content {
+        min-height: 500px;
+      }
+
+      .venue-content,
+      .venue-card.image-right .venue-content {
+        margin-left: 0;
+        padding: 44px;
+      }
+
+      .venue-card::after,
+      .venue-card.image-right::after {
+        background:
+          linear-gradient(90deg, rgba(3,31,42,.88) 0%, rgba(3,31,42,.58) 54%, rgba(3,31,42,.18) 100%),
+          linear-gradient(180deg, rgba(3,31,42,.05), rgba(3,31,42,.62));
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero,
+      .hero-content-wrap {
+        height: 100svh;
+        min-height: 100svh;
+      }
+
+      .hero-content {
+        padding-bottom: 74px;
+      }
+
+      .hero h1 {
+        font-size: 2.55rem;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .btn,
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .hero-note {
+        display: none;
+      }
+
+      .venue-list {
+        padding: 70px 0;
+      }
+
+      .venue-card,
+      .venue-content {
+        min-height: 560px;
+      }
+
+      .venue-content,
+      .venue-card.image-right .venue-content {
+        padding: 32px;
+      }
+
+      .venue-content h3 {
+        font-size: 2rem;
+      }
+
+      .venue-content p {
+        font-size: .86rem;
+      }
+
+      .cta {
+        padding: 76px 24px;
+      }
+
+      .cta-box {
+        padding: 32px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+   <!-- Header -->
+  <header class="header" id="siteHeader">
+    <div class="wide-container">
+      <nav class="nav">
+        <a href="index.html" class="logo">
+          <img src="../public/icons/logo-white.svg" alt="">
+        </a>
+
+        <div class="menu-area">
+
+          <div class="nav-panel" id="navPanel">
+            <a href="index.php" class="active">Home</a>
+            <a href="work.php">Work</a>
+            <a href="#competence">Skills</a>
+            <a href="./routes/venues.php">Venues</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+            <i class="bi bi-list icon-menu"></i>
+            <i class="bi bi-x-lg icon-close"></i>
+          </button>
+
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero" data-header-theme="dark">
+    <div class="hero-media">
+      <img src="../public/img/profile/mlimani00.png" alt="3D venue model in Tanzania">
+    </div>
+
+    <div class="container hero-content-wrap">
+      <div class="hero-content">
+        <span class="hero-kicker">Venue 3D Library</span>
+        <h1>See the venue before the event.</h1>
+        <p>
+          3D venue models for event spaces in Tanzania. View, observe, and plan venue branding,
+          layout, booth position, stage design, and visitor flow before production.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#venue-list" class="btn">View Venues</a>
+          <a href="#contact" class="btn btn-ghost">Request Venue</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-note">
+      <span>01</span> / Venue visualization
+    </div>
+  </section>
+
+  <!-- Venue Cards -->
+  <section class="venue-list" id="venue-list" data-header-theme="light">
+    <div class="container">
+      <div class="venue-intro">
+        <div>
+          <span class="section-kicker">Available venues</span>
+          <h2>Choose a venue to view more.</h2>
+        </div>
+
+        <p>
+          Each venue has a full visual preview with details. Click the button to open the specific venue page
+          and see more images, angles, planning options, and branding possibilities.
+        </p>
+      </div>
+
+      <div class="venue-stack">
+
+        <article class="venue-card">
+          <img src="../public/img/profile/mlimani01.png" alt="Mlimani City venue model">
+
+          <div class="venue-content">
+            <small>Dar es Salaam / Exhibition venue</small>
+            <h3>Mlimani City</h3>
+            <p>
+              Outdoor, entrance, parking, exhibition, and event branding visualization for large public events,
+              activations, and exhibitions.
+            </p>
+
+            <div class="venue-tags">
+              <span>Outdoor view</span>
+              <span>Entrance branding</span>
+              <span>Booth planning</span>
+              <span>Visitor flow</span>
+            </div>
+
+            <a href="venue-mlimani-city.html" class="btn">
+              View Venue <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="venue-card image-right">
+          <img src="./public/img/profile/venue-serena-01.png" alt="Serena Hotel venue model">
+
+          <div class="venue-content">
+            <small>Dar es Salaam / Hotel hall</small>
+            <h3>Serena Hotel</h3>
+            <p>
+              Premium indoor event visualization for conference setup, stage backdrop, banquet seating,
+              VIP arrangement, and sponsor visibility.
+            </p>
+
+            <div class="venue-tags">
+              <span>Stage setup</span>
+              <span>Banquet seating</span>
+              <span>LED screen</span>
+              <span>VIP flow</span>
+            </div>
+
+            <a href="venue-serena-hotel.html" class="btn">
+              View Venue <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="venue-card">
+          <img src="./public/img/profile/venue-sabasaba-01.png" alt="SabaSaba exhibition venue model">
+
+          <div class="venue-content">
+            <small>Dar es Salaam / Trade fair venue</small>
+            <h3>SabaSaba</h3>
+            <p>
+              Exhibition booth and brand activation planning for trade fair setups,
+              public interaction spaces, product corners, and institutional booths.
+            </p>
+
+            <div class="venue-tags">
+              <span>Booth design</span>
+              <span>Public flow</span>
+              <span>Brand walls</span>
+              <span>Activation space</span>
+            </div>
+
+            <a href="venue-sabasaba.html" class="btn">
+              View Venue <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="venue-card image-right">
+          <img src="../public/img/profile/jnicc0.png" alt="JNICC venue model">
+
+          <div class="venue-content">
+            <small>Dar es Salaam / Conference venue</small>
+            <h3>JNICC</h3>
+            <p>
+              Conference venue planning for stage design, sponsor branding, delegate movement,
+              registration areas, and formal event presentation.
+            </p>
+
+            <div class="venue-tags">
+              <span>Conference</span>
+              <span>Stage branding</span>
+              <span>Registration</span>
+              <span>Delegate flow</span>
+            </div>
+
+            <a href="venue-jnicc.html" class="btn">
+              View Venue <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="venue-card">
+          <img src="./public/img/profile/venue-hotelhall-01.png" alt="Hotel hall venue model">
+
+          <div class="venue-content">
+            <small>Tanzania / Indoor hall</small>
+            <h3>Hotel Halls</h3>
+            <p>
+              Flexible indoor venue visualization for workshops, summits, launches,
+              panel sessions, registration points, and sponsor zones.
+            </p>
+
+            <div class="venue-tags">
+              <span>Indoor setup</span>
+              <span>Workshop</span>
+              <span>Launch event</span>
+              <span>Panel session</span>
+            </div>
+
+            <a href="venue-hotel-halls.html" class="btn">
+              View Venue <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="venue-card image-right">
+          <img src="./public/img/profile/venue-custom-01.png" alt="Custom venue model">
+
+          <div class="venue-content">
+            <small>Custom / Any location</small>
+            <h3>Custom Venue Model</h3>
+            <p>
+              Send venue images, videos, or layout details and get a visual planning model
+              for your specific event space.
+            </p>
+
+            <div class="venue-tags">
+              <span>Custom model</span>
+              <span>From photos</span>
+              <span>Event planning</span>
+              <span>3D preview</span>
+            </div>
+
+            <a href="#contact" class="btn">
+              Request Model <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" data-header-theme="light">
+    <div class="cta-box">
+      <div>
+        <h2>Need a venue preview?</h2>
+        <p>
+          Send venue photos or layout. I can create a 3D visual preview for planning,
+          branding, production, and client presentation.
+        </p>
+      </div>
+
+      <a href="#contact" class="btn">
+        Start Discussion
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <section class="footer-section" id="contact" data-header-theme="dark">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h2>Venue planning made visible.</h2>
+          <p>
+            3D venue models for exhibitions, events, conferences, summits, brand activations,
+            and production planning across Tanzania.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <a href="mailto:hello@mustapha.co.tz">
+            Email
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+          <a href="https://wa.me/255712257370" target="_blank">
+            WhatsApp
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+
+          <a href="index.html">
+            Back to Home
+            <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <p class="copyright">
+        © <span id="year"></span> Abdul Mustapha Hemedi. All rights reserved.
+      </p>
+    </div>
+  </section>
+
+  <script>
+    const siteHeader = document.getElementById("siteHeader");
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.querySelectorAll(".nav-panel a");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = siteHeader.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        siteHeader.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!siteHeader.contains(event.target)) {
+        siteHeader.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        siteHeader.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+      }
+    });
+
+    const themeSections = document.querySelectorAll("[data-header-theme]");
+
+    function updateHeaderTheme() {
+      const checkPoint = 42;
+
+      themeSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= checkPoint && rect.bottom >= checkPoint) {
+          const theme = section.dataset.headerTheme;
+
+          if (theme === "light") {
+            siteHeader.classList.add("on-light");
+          } else {
+            siteHeader.classList.remove("on-light");
+          }
+        }
+      });
+    }
+
+    window.addEventListener("scroll", updateHeaderTheme);
+    window.addEventListener("resize", updateHeaderTheme);
+    updateHeaderTheme();
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
