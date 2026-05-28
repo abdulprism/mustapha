@@ -26,7 +26,7 @@
   <header class="header" id="siteHeader">
     <div class="wide-container">
       <nav class="nav">
-        <a href="index.html" class="logo">
+        <a href="index.php" class="logo">
           <img src="./public/icons/logo-white.svg" alt="">
         </a>
 
@@ -55,19 +55,19 @@
     <div class="hero-slider" id="heroSlider">
 
       <div class="hero-slide active">
-        <img src="./public/img/profile/hero0.png" alt="3D architectural visual design">
+        <img src="./public/img/profile/hero0.jpg" alt="3D architectural visual design">
       </div>
 
       <div class="hero-slide">
-        <img src="./public/img/profile/hero1.png" alt="Exhibition booth visual design">
+        <img src="./public/img/profile/hero1.jpg" alt="Exhibition booth visual design">
       </div>
 
       <div class="hero-slide">
-        <img src="./public/img/profile/hero2.png" alt="Event branding visual design">
+        <img src="./public/img/profile/hero2.jpg" alt="Event branding visual design">
       </div>
 
       <div class="hero-slide">
-        <img src="./public/img/profile/office0.png" alt="Website interface visual design">
+        <img src="./public/img/profile/office0.jpg" alt="Website interface visual design">
       </div>
     </div>
 
@@ -150,7 +150,7 @@
 
     <div class="split-row project-item">
       <div class="split-image">
-        <img src="./public/img/profile/site01.png" alt="SITE Tourism Event">
+        <img src="./public/img/profile/mlimani00.jpg" alt="SITE Tourism Event">
       </div>
 
       <div class="split-copy">
@@ -175,7 +175,7 @@
 
     <div class="split-row reverse project-item">
       <div class="split-image">
-        <img src="./public/img/profile/tib0.png" alt="TIB Booth Concept">
+        <img src="./public/img/profile/tib0.jpg" alt="TIB Booth Concept">
       </div>
 
       <div class="split-copy">
@@ -200,7 +200,7 @@
 
     <div class="split-row project-item">
       <div class="split-image">
-        <img src="./public/img/profile/udsm0.png" alt="SAFE & PROLA Booth">
+        <img src="./public/img/profile/tent0.jpg" alt="SAFE & PROLA Booth">
       </div>
 
       <div class="split-copy">
@@ -228,7 +228,7 @@
   <section class="venue-section" id="venues" data-header-theme="dark">
     <div class="venue-shell">
       <div class="venue-card">
-        <img src="./public/img/profile/mlimani00.png" alt="3D venue model in Tanzania">
+        <img src="./public/img/profile/mlimani02.jpg" alt="3D venue model in Tanzania">
 
         <div class="venue-content">
 
@@ -246,7 +246,7 @@
             <span>Event halls</span>
           </div>
 
-          <a href="./routes/venues.html" class="btn">
+          <a href="./routes/venues.php" class="btn">
             View Venue Feature <i class="bi bi-arrow-right"></i>
           </a>
 
@@ -260,41 +260,39 @@
 
   <!-- Mosaic -->
   <section class="mosaic-section" data-header-theme="light">
+
     <div class="mosaic">
+
       <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-01.png" alt="Power Relief booth">
+        <img src="./public/img/work/udsm/profile.jpg" alt="Power Relief booth">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-02.png" alt="Power Relief artwork">
+        <img src="./public/img/work/dowelef/profile.jpg" alt="Power Relief artwork">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/tib-booth-02.png" alt="TIB booth visual">
+        <img src="./public/img/work/mwangaBank/profile.jpg" alt="TIB booth visual">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-01.png" alt="Power Relief booth">
+        <img src="./public/img/work/ADFinanceSystem/profile.jpg" alt="Power Relief booth">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-02.png" alt="Power Relief artwork">
+        <img src="./public/img/work/khanStudio/profile.jpg" alt="TIB booth visual">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/tib-booth-02.png" alt="TIB booth visual">
+        <img src="./public/img/work/officeDsign/profile.jpg" alt="Power Relief booth">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-01.png" alt="Power Relief booth">
+        <img src="./public/img/work/studio/profile.jpg" alt="Power Relief artwork">
       </div>
 
       <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-02.png" alt="Power Relief artwork">
-      </div>
-
-      <div class="mosaic-item">
-        <img src="./public/img/profile/tib-booth-02.png" alt="TIB booth visual">
+        <img src="./public/img/work/TIB/profile.jpg" alt="TIB booth visual">
       </div>
     </div>
   </section>

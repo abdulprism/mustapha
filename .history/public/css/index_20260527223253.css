@@ -855,12 +855,12 @@
 
 .mosaic {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   background: #d9d9d9;
 }
 
 .mosaic-item {
-  height: 400px;
+  height: 330px;
   overflow: hidden;
   position: relative;
   background: #cfd6d8;

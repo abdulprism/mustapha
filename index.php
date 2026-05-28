@@ -26,7 +26,7 @@
   <header class="header" id="siteHeader">
     <div class="wide-container">
       <nav class="nav">
-        <a href="index.html" class="logo">
+        <a href="index.php" class="logo">
           <img src="./public/icons/logo-white.svg" alt="">
         </a>
 
@@ -150,19 +150,19 @@
 
     <div class="split-row project-item">
       <div class="split-image">
-        <img src="./public/img/profile/mlimani00.jpg" alt="SITE Tourism Event">
+        <img src="./public/img/work/dowelef/profile.jpg" alt="SITE Tourism Event">
       </div>
 
       <div class="split-copy">
         <div class="split-inner">
           <span class="project-chip">On going project</span>
-          <h3>SITE Tourism Event</h3>
+          <h3>Dowelef Event</h3>
 
           <span class="click-hint">click to view details <i class="bi bi-arrow-down"></i></span>
 
           <div class="project-reveal">
             <p>
-              Event visual direction, booth concept, and brand presentation for a tourism-focused event environment.
+              Event visual direction, booth concept, and brand presentation for a electric car focused event environment.
             </p>
 
             <a href="work.html#site-tourism" class="btn">
@@ -255,49 +255,109 @@
     </div>
   </section>
 
-  <!-- Breathing Space -->
-  <section class="breathing-block" data-header-theme="light"></section>
-
   <!-- Mosaic -->
   <section class="mosaic-section" data-header-theme="light">
     <div class="mosaic">
-      <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-01.png" alt="Power Relief booth">
-      </div>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-02.png" alt="Power Relief artwork">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/udsm/profile.jpg" alt="UDSM booth project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Event Booth</span>
+            <h3>UDSM Exhibition Setup</h3>
+            <p>Clean branded booth setup designed for professional event presentation.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/tib-booth-02.png" alt="TIB booth visual">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/dowelef/profile.jpg" alt="Dowelef artwork project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Brand Artwork</span>
+            <h3>Dowelef Visual Design</h3>
+            <p>Minimal artwork direction created for strong brand visibility.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-01.png" alt="Power Relief booth">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/mwangaBank/profile.jpg" alt="Mwanga Bank visual project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Corporate Design</span>
+            <h3>Mwanga Bank Concept</h3>
+            <p>Smart visual layout for a clean and trustworthy corporate presence.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-02.png" alt="Power Relief artwork">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/ADFinanceSystem/profile.jpg" alt="AD Finance system project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Web System</span>
+            <h3>AD Finance System</h3>
+            <p>A digital finance interface focused on clarity, usability and control.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/tib-booth-02.png" alt="TIB booth visual">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/khanStudio/profile.jpg" alt="Khan Studio project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Studio Design</span>
+            <h3>Khan Studio</h3>
+            <p>Interior visual concept with a clean, premium and functional layout.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-01.png" alt="Power Relief booth">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/officeDsign/profile.jpg" alt="Office design project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Interior Design</span>
+            <h3>Office Design</h3>
+            <p>Modern office concept with calm spacing and professional visual balance.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/power-relief-02.png" alt="Power Relief artwork">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/studio/profile.jpg" alt="Studio project">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Creative Space</span>
+            <h3>Studio Setup</h3>
+            <p>A refined space concept designed for production and creative work.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
 
-      <div class="mosaic-item">
-        <img src="./public/img/profile/tib-booth-02.png" alt="TIB booth visual">
-      </div>
+      <article class="mosaic-item">
+        <img src="./public/img/work/TIB/profile.jpg" alt="TIB booth visual">
+        <div class="mosaic-overlay">
+          <div>
+            <span>Exhibition Booth</span>
+            <h3>TIB Booth Visual</h3>
+            <p>Professional booth design with a strong institutional brand presence.</p>
+            <a href="#" class="mosaic-btn">View more</a>
+          </div>
+        </div>
+      </article>
+
     </div>
   </section>
+
 
   <!-- Soft CTA -->
   <section class="soft-cta" data-header-theme="light">
@@ -325,22 +385,53 @@
           </p>
         </div>
 
-        <div class="footer-links">
-          <a href="mailto:hello@mustapha.co.tz">
-            Email
-            <i class="bi bi-arrow-up-right"></i>
+        <div class="footer-links" aria-label="Footer contact links">
+          <a href="mailto:abdul@mustapha.co.tz" aria-label="Send email to Mustapha">
+            <span>Email</span>
+            <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
           </a>
 
-          <a href="https://wa.me/255712257370" target="_blank">
-            WhatsApp
-            <i class="bi bi-arrow-up-right"></i>
+          <a 
+            href="https://wa.me/255712257370" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="Contact Mustapha on WhatsApp"
+          >
+            <span>WhatsApp</span>
+            <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
           </a>
 
-          <a href="#">
-            Instagram / Behance
-            <i class="bi bi-arrow-up-right"></i>
+          <a 
+            href="https://www.behance.net/mustaphatz" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="View Mustapha on Behance"
+          >
+            <span>Behance</span>
+            <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+          </a>
+
+          <a 
+            href="https://www.linkedin.com/in/abdul-mustapha-aaa172412" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="View Mustapha on LinkedIn"
+          >
+            <span>LinkedIn</span>
+            <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+          </a>
+
+          <a 
+            href="https://www.instagram.com/mustaphatz.3d/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="View Mustapha on Instagram"
+          >
+            <span>Instagram</span>
+            <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
           </a>
         </div>
+
       </div>
 
       <p class="copyright">
@@ -465,6 +556,30 @@
     updateHeaderTheme();
 
     document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <script>
+    const mosaicItems = document.querySelectorAll('.mosaic-item');
+
+    mosaicItems.forEach((item) => {
+      item.addEventListener('click', function (e) {
+        if (e.target.closest('.mosaic-btn')) return;
+
+        mosaicItems.forEach((otherItem) => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('is-active');
+          }
+        });
+
+        item.classList.toggle('is-active');
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.mosaic-item')) {
+        mosaicItems.forEach((item) => item.classList.remove('is-active'));
+      }
+    });
   </script>
 
 </body>
